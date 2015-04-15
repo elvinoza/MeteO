@@ -24,7 +24,6 @@ public class NotifyService {
     }
 
     public void start() {
-        Log.d("is", "working...");
         Calendar calendar = Calendar.getInstance();
 
         Intent intent = new Intent(context, AlarmReceiver.class);

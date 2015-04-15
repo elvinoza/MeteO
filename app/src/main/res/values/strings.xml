@@ -9,6 +9,7 @@
     <bool name="windSpeedCheck">false</bool>
     <bool name="humidityCheck">false</bool>
     <bool name="temperatureCheck">false</bool>
+    <bool name="willBeNotified">false</bool>
     <string name="rainSettedValue">0.0</string>
     <string name="windSpeedSettedValue">0.0</string>
     <string name="humiditySettedValue">0.0</string>

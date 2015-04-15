@@ -25,7 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     MainConstants constants;
     public static final String SettingsPREFERENCES = "SettingsPrefs";
     String stationId;
-    double rain;
+    double rain, windSpeed, humidity, temperature;
     @Override
     public void onReceive(Context context, Intent intent) {
         sharedpreferences = context.getSharedPreferences(SettingsPREFERENCES, Context.MODE_PRIVATE);
@@ -54,25 +54,59 @@ public class AlarmReceiver extends BroadcastReceiver {
         nfM.notify(1,myNotification.build());
     }
 
+    public boolean checkIfBeforeWillBeNotified(){
+        SharedPreferences.Editor ed = sharedpreferences.edit();
+        boolean notify = false;
+        if(sharedpreferences.contains("willBeNotified")){
+            notify = sharedpreferences.getBoolean("willBeNotified", true);
+            ed.putBoolean("willBeNotified", notify);
+            ed.commit();
+            return notify;
+        }
+        return notify;
+    }
+
     public void notifyUser(Context context, double rain){
         String msg;
         boolean notify = false;
 
-        if(sharedpreferences.contains(constants.rainSpinnerValue) && sharedpreferences.contains(constants.rainSettedValue)){
-            if(sharedpreferences.getString(constants.rainSpinnerValue, "").contains("More")) {
-                if(rain >= Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
-                    notify = true;
+        if(sharedpreferences.contains(constants.rainSpinnerValue) && sharedpreferences.contains(constants.rainSettedValue) && sharedpreferences.contains(constants.rainCheck)){
+            if(sharedpreferences.getBoolean(constants.rainCheck, true))
+                if(sharedpreferences.getString(constants.rainSpinnerValue, "").contains("More")) {
+                    if(rain >= Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
+                        Log.d("y", "here-1");
+                        notify = true;
+                    }
                 }
-            }
-            else {
-                if(rain < Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
-                    notify = true;
+                else {
+                    if(rain < Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
+                        Log.d("y", "here-2");
+                        notify = true;
+                    }
                 }
-            }
         }
-        msg = "Hey! Check your selected station last information!";
-        if(notify)
+        Log.d("wind Speed", Double.toString(windSpeed));
+        if(sharedpreferences.contains(constants.winSpeedSpinerValue) && sharedpreferences.contains(constants.windSpeedSettedValue) && sharedpreferences.contains(constants.windSpeedCheck)){
+            if(sharedpreferences.getBoolean(constants.windSpeedCheck, true))
+                if(sharedpreferences.getString(constants.winSpeedSpinerValue, "").contains("More")){
+                    if(windSpeed >= Double.parseDouble(sharedpreferences.getString(constants.windSpeedSettedValue,""))){
+                        notify = true;
+                        Log.d("y", "here1");
+                    }
+                }
+                else {
+                    if(windSpeed < Double.parseDouble(sharedpreferences.getString(constants.windSpeedSettedValue,""))){
+                        Log.d("y", "here2");
+                        notify = true;
+                    }
+                }
+        }
+
+        //&& checkIfBeforeWillBeNotified()
+        if(notify ) {
+            msg = "Hey! Check your selected station last information!";
             showNotification(context, msg);
+        }
     }
 
     private class CheckStationInfo extends AsyncTask<String, String, JSONObject> {
@@ -102,6 +136,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 JSONObject c = json.getJSONObject("information");
                 Log.d("c", c.toString());
                 rain = c.getDouble("rain");
+                windSpeed = c.getDouble("wind_speed");
+                humidity = c.getDouble("humidity");
+                temperature = c.getDouble("temperature");
                 notifyUser(this.context, rain);
             } catch (JSONException e){
                 e.printStackTrace();
