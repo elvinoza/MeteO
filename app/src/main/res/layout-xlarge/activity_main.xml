@@ -1,0 +1,126 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context=".MainActivity" tools:ignore="MergeRootFrame"
+    style="@style/MeteO">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Last station information"
+        android:id="@+id/meteO"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="373dp"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/action_settings"
+        style="@style/AppTheme">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/temperatureValue"
+            android:text="Updating..."
+            android:layout_alignTop="@+id/lightLevelValue"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/humidityValue"
+            android:layout_gravity="left"
+            android:layout_below="@+id/imageButton"
+            android:layout_toRightOf="@+id/imageButton"
+            android:layout_toEndOf="@+id/imageButton" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/lightLevelValue"
+            android:layout_alignTop="@+id/pressureValue"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/pressureValue"
+            android:layout_alignBaseline="@+id/windDirectionValue"
+            android:layout_alignBottom="@+id/windDirectionValue"
+            android:layout_toLeftOf="@+id/lightLevelValue"
+            android:layout_toStartOf="@+id/lightLevelValue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/windDirectionValue"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/windSpeedValue"
+            android:layout_alignTop="@+id/imageButton"
+            android:layout_toRightOf="@+id/rainValue"
+            android:layout_toEndOf="@+id/rainValue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/rainValue"
+            android:layout_alignTop="@+id/updatedAtValue"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Updating..."
+            android:id="@+id/updatedAtValue"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/imageView"
+            android:layout_toLeftOf="@+id/rainValue"
+            android:layout_toStartOf="@+id/rainValue" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_below="@+id/updatedAtValue"
+            android:layout_alignLeft="@+id/updatedAtValue"
+            android:layout_alignStart="@+id/updatedAtValue"
+            android:layout_marginTop="30dp"
+            android:background="@mipmap/ic_action_refresh" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/warm"
+            android:layout_marginTop="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

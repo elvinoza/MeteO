@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="MeteO" parent="android:Theme.Holo">
+      
+    <item name="android:windowBackground">@color/background_holo_dark</item>
+
+    <item name="android:editTextBackground">@drawable/meteo_edit_text_holo_dark</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/meteo_btn_check_holo_dark</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/meteo_btn_radio_holo_dark</item>
+
+    <item name="android:buttonStyle">@style/ButtonMeteO</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonMeteO</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerMeteO</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/meteo_list_selector_holo_dark</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/meteo_activated_background_holo_dark</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/meteo_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>

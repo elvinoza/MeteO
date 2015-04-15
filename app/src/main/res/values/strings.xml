@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MeteO</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="lookingStationId">lookingStationId</string>
+    <bool name="notify">false</bool>
+    <bool name="rainCheck">false</bool>
+    <bool name="windSpeedCheck">false</bool>
+    <bool name="humidityCheck">false</bool>
+    <bool name="temperatureCheck">false</bool>
+    <string name="rainSettedValue">0.0</string>
+    <string name="windSpeedSettedValue">0.0</string>
+    <string name="humiditySettedValue">0.0</string>
+    <string name="temperatureSettedValue">0.0</string>
+    <string name="rainSettedSpiner">More than</string>
+    <string name="winSpeedSettedSpiner">More than</string>
+    <string name="humiditySettedSpiner">More than</string>
+    <string name="temperatureSettedSpiner">More than</string>
+
+    <string-array name="spinner_values">
+        <item>More than</item>
+        <item>Less than</item>
+    </string-array>
+
+    <string name="lostpassword">If you lost your password please contact <a href="http://www.google.lt">link</a></string>
+</resources>
