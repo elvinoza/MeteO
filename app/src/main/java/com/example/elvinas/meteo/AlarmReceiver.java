@@ -66,47 +66,100 @@ public class AlarmReceiver extends BroadcastReceiver {
         return notify;
     }
 
+    public void setNotified(boolean status){
+        SharedPreferences.Editor ed = sharedpreferences.edit();
+        ed.putBoolean("willBeNotified", status);
+        ed.commit();
+    }
+
+    public boolean getNotified(){
+        return sharedpreferences.getBoolean("willBeNotified", true);
+    }
+
+    public boolean compare(String operator, double var1, double var2){
+        boolean result;
+        if(operator.contains("More")){
+            result = var1 < var2;
+            if(result && !getNotified()){
+                setNotified(true);
+            } else if (result && getNotified()) {
+                setNotified(false);
+            } else if(!result && getNotified()){
+                setNotified(false);
+            } else if(!result && !getNotified()){
+                setNotified(false);
+            }
+
+        } else if(operator.contains("Less")){
+            result = var1 > var2;
+            if(result && !getNotified()){
+                setNotified(true);
+            } else if (result && getNotified()) {
+                setNotified(false);
+            }
+        } else {
+            result = var1 == var2;
+            if(result && !getNotified()){
+                setNotified(true);
+            } else if (result && getNotified()) {
+                setNotified(false);
+            }
+        }
+        return result;
+    }
+
     public void notifyUser(Context context, double rain){
         String msg;
+        boolean result = false;
         boolean notify = false;
 
         if(sharedpreferences.contains(constants.rainSpinnerValue) && sharedpreferences.contains(constants.rainSettedValue) && sharedpreferences.contains(constants.rainCheck)){
-            if(sharedpreferences.getBoolean(constants.rainCheck, true))
-                if(sharedpreferences.getString(constants.rainSpinnerValue, "").contains("More")) {
-                    if(rain >= Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
-                        Log.d("y", "here-1");
-                        notify = true;
-                    }
+            if(sharedpreferences.getBoolean(constants.rainCheck, true)){
+                result = compare(sharedpreferences.getString(constants.rainSpinnerValue, ""), Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,"")), rain);
+                if(result){
+                    notify = result;
+                    result = false;
                 }
-                else {
-                    if(rain < Double.parseDouble(sharedpreferences.getString(constants.rainSettedValue,""))){
-                        Log.d("y", "here-2");
-                        notify = true;
-                    }
-                }
-        }
-        Log.d("wind Speed", Double.toString(windSpeed));
-        if(sharedpreferences.contains(constants.winSpeedSpinerValue) && sharedpreferences.contains(constants.windSpeedSettedValue) && sharedpreferences.contains(constants.windSpeedCheck)){
-            if(sharedpreferences.getBoolean(constants.windSpeedCheck, true))
-                if(sharedpreferences.getString(constants.winSpeedSpinerValue, "").contains("More")){
-                    if(windSpeed >= Double.parseDouble(sharedpreferences.getString(constants.windSpeedSettedValue,""))){
-                        notify = true;
-                        Log.d("y", "here1");
-                    }
-                }
-                else {
-                    if(windSpeed < Double.parseDouble(sharedpreferences.getString(constants.windSpeedSettedValue,""))){
-                        Log.d("y", "here2");
-                        notify = true;
-                    }
-                }
+            }
         }
 
+        if(sharedpreferences.contains(constants.winSpeedSpinerValue) && sharedpreferences.contains(constants.windSpeedSettedValue) && sharedpreferences.contains(constants.windSpeedCheck)){
+            if(sharedpreferences.getBoolean(constants.windSpeedCheck, true)){
+                result = compare(sharedpreferences.getString(constants.winSpeedSpinerValue, ""), Double.parseDouble(sharedpreferences.getString(constants.windSpeedSettedValue,"")), windSpeed);
+                if(result){
+                    notify = result;
+                    result = false;
+                }
+            }
+        }
+
+        if(sharedpreferences.contains(constants.humiditySpinerValue) && sharedpreferences.contains(constants.humiditySettedValue) && sharedpreferences.contains(constants.humidityCheck)){
+            if(sharedpreferences.getBoolean(constants.humidityCheck, true)){
+                result = compare(sharedpreferences.getString(constants.humiditySpinerValue, ""), Double.parseDouble(sharedpreferences.getString(constants.humiditySettedValue,"")), humidity);
+                if(result){
+                    notify = result;
+                    result = false;
+                }
+            }
+        }
+
+        if(sharedpreferences.contains(constants.temperatureSpinerValue) && sharedpreferences.contains(constants.temperatureSettedValue) && sharedpreferences.contains(constants.temperatureCheck)){
+            if(sharedpreferences.getBoolean(constants.temperatureCheck, true)){
+                result = compare(sharedpreferences.getString(constants.temperatureSpinerValue, ""), Double.parseDouble(sharedpreferences.getString(constants.temperatureSettedValue,"")), temperature);
+                if(result){
+                    notify = result;
+                    result = false;
+                }
+            }
+        }
         //&& checkIfBeforeWillBeNotified()
-        if(notify ) {
+        if(notify && getNotified()) {
             msg = "Hey! Check your selected station last information!";
             showNotification(context, msg);
         }
+        if(notify)
+            if(!getNotified())
+                setNotified(true);
     }
 
     private class CheckStationInfo extends AsyncTask<String, String, JSONObject> {
