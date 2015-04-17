@@ -143,16 +143,16 @@
             android:id="@+id/temperatureSpinner"
             android:spinnerMode="dialog"
             android:layout_marginTop="350dp"
-            android:layout_marginLeft="115dp" />
+            android:layout_marginLeft="145dp" />
 
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/temperatureSetedValue"
             android:layout_alignTop="@+id/temperatureSpinner"
-            android:layout_marginLeft="250dp"/>
+            android:layout_marginLeft="275dp"/>
 
     </RelativeLayout>
 </FrameLayout>

@@ -22,6 +22,7 @@
     <string-array name="spinner_values">
         <item>More than</item>
         <item>Less than</item>
+        <item>Equals</item>
     </string-array>
 
     <string name="lostpassword">If you lost your password please contact <a href="http://www.google.lt">link</a></string>

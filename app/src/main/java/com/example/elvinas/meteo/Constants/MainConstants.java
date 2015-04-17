@@ -8,10 +8,7 @@ public class MainConstants{
     public static final String SettingsPREFERENCES = "SettingsPrefs";
     public static final String lookingStationId = "lookingStationId";
 
-
-
-
-
+    public static final String BASE_URL = "http://158.129.18.217:8000/api/v1";
 
     //settings constants
     public static final String rainCheck = "rainCheck";
@@ -29,8 +26,4 @@ public class MainConstants{
     public static final String windSpeedSettedValue = "windSpeedSettedValue";
     public static final String humiditySettedValue = "humiditySettedValue";
     public static final String temperatureSettedValue = "temperatureSettedValue";
-
-
-
-
 }

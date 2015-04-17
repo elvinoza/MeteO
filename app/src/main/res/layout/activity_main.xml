@@ -15,7 +15,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="460dp"
         android:layout_marginTop="50dp"
 
         android:id="@+id/action_settings"
@@ -79,7 +79,7 @@
             android:text="15"
             android:textSize="25dp"
             android:id="@+id/windSpeedValue"
-            android:layout_marginLeft="275dp"
+            android:layout_marginLeft="255dp"
             android:layout_marginTop="55dp"
             android:layout_centerVertical="@+id/temperatureValue"
              />
@@ -90,7 +90,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="0.2"
             android:textSize="25dp"
-            android:layout_marginLeft="48dp"
+            android:layout_marginLeft="28dp"
             android:layout_marginTop="55dp"
             android:id="@+id/rainValue" />
 
@@ -100,9 +100,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Updating..."
             android:id="@+id/updatedAtValue"
-            android:textSize="25dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="263dp" />
+            android:textSize="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="435dp" />
 
 
 
@@ -154,14 +154,6 @@
             android:src="@mipmap/light"
             android:layout_marginTop="200dp"
             android:layout_marginLeft="245dp"/>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView8"
-            android:src="@mipmap/clock104"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="260dp"/>
 
         <ImageButton
             android:layout_width="80dp"

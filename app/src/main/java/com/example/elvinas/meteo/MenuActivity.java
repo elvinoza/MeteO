@@ -141,7 +141,7 @@ public class MenuActivity extends Activity {
         editor.putString(constants.windSpeedSettedValue, windSpeedValue.getText().toString());
         editor.putBoolean(constants.windSpeedCheck, windSpeedCheck.isChecked());
         editor.putString(constants.winSpeedSpinerValue, windSpeedSp.getSelectedItem().toString());
-
+        Log.d("ON SAVE", windSpeedSp.getSelectedItem().toString());
         editor.putString(constants.temperatureSettedValue, temperatureValue.getText().toString());
         editor.putBoolean(constants.temperatureCheck, temperatureCheck.isChecked());
         editor.putString(constants.temperatureSpinerValue, temperatureSp.getSelectedItem().toString());
@@ -151,7 +151,8 @@ public class MenuActivity extends Activity {
         editor.putString(constants.humiditySpinerValue, humiditySp.getSelectedItem().toString());
 
         if(can)
-            editor.commit();
+            editor.apply();
+        Log.d("after ON SAVE", sharedpreferences.getString(constants.winSpeedSpinerValue, ""));
     }
 
     public void stopStartService(){
@@ -187,7 +188,9 @@ public class MenuActivity extends Activity {
         if(sharedpreferences.contains(spinner)){
             if(sharedpreferences.getString(spinner, "").contains("More"))
                 spin.setSelection(0);
-            else spin.setSelection(1);
+            else if(sharedpreferences.getString(spinner, "").contains("Less"))
+                spin.setSelection(1);
+            else spin.setSelection(2);
         }
     }
 
@@ -243,7 +246,7 @@ public class MenuActivity extends Activity {
             JSONParser jParser = new JSONParser();
             // Getting JSON from URL
 
-            JSONObject json = jParser.getJSONFromUrl("http://158.129.18.217:8000/api/v1/app/checkStation/" + stationId.getText().toString());
+            JSONObject json = jParser.getJSONFromUrl(constants.BASE_URL +"/app/checkStation/" + stationId.getText().toString());
             return json;
         }
 

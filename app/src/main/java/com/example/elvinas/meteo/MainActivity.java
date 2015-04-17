@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.elvinas.meteo.Constants.MainConstants;
 import com.example.elvinas.meteo.Interfaces.AsyncResponse;
 import com.example.elvinas.meteo.services.MeteoService;
 import com.example.elvinas.meteo.services.NotifyService;
@@ -51,6 +52,7 @@ public class MainActivity extends Activity  {
     public static final String SettingsPREFERENCES = "SettingsPrefs";
     TextView temp, hum, light,pres,windDir, windSpeed, dRain, date;
     ImageButton refreshButton;
+    MainConstants constants;
     private static final String info = "information";
     private static final String temperature = "temperature";
     private static final String humidity = "humidity";
@@ -158,7 +160,7 @@ public class MainActivity extends Activity  {
         @Override
         protected JSONObject doInBackground(String... args) {
             JSONParser jParser = new JSONParser();
-            JSONObject json = jParser.getJSONFromUrl("http://158.129.18.217:8000/api/v1/get/lastStationInformation/3RkTSJ");
+            JSONObject json = jParser.getJSONFromUrl(constants.BASE_URL +"/get/lastStationInformation/3RkTSJ");
             return json;
         }
         @Override
@@ -167,13 +169,13 @@ public class MainActivity extends Activity  {
             try {
                 JSONObject c = json.getJSONObject(info);
                 temp.setText(Integer.toString((int) Math.round(Double.parseDouble(c.getString(temperature)))));
-                hum.setText(c.getString(humidity));
-                light.setText(c.getString(light_level));
-                pres.setText(c.getString(pressure));
+                hum.setText(c.getString(humidity) + "%");
+                light.setText(c.getString(light_level) + " cd");
+                pres.setText(c.getString(pressure) + " Pa");
                 windDir.setText(c.getString(wind_direction));
-                windSpeed.setText(c.getString(wind_speed));
-                dRain.setText(c.getString(rain));
-                date.setText(c.getString(created_at));
+                windSpeed.setText(c.getString(wind_speed) + " km/h");
+                dRain.setText(c.getString(rain) + " mm");
+                date.setText("Last update time: " + c.getString(created_at));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
